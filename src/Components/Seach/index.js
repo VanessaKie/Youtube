@@ -12,7 +12,6 @@ class Search extends React.Component {
 
     handleSearch = (e) => {
         const input = e.target.value;
-
         this.setState({
             search: input
         })        
