@@ -1,26 +1,79 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import API from './Config/apicall';
+
+import Search from './Components/Seach';
+import VideoDetail from './Components/VideoDetail';
+import VideoList from './Components/VideoList';
+
+class App extends React.Component {
+  constructor(props){
+    super(props)  
+    this.state = {
+      display: false,
+      iFrame: false,
+      loading: true,
+    }
+    this.repsonse = false;
+  }
+
+/*   componentDidMount(){
+    this.searchVideo('cats');
+  } */
+  
+  searchVideo = async search => {
+    const response = await API.get('/search', {
+      params:{
+        q: search
+      }
+    })
+
+    this.response = response;
+
+    console.log('this.response', this.response.data.items[0].id.videoId);
+
+    let resp = this.response.data.items;
+    const display = [];
+        if (this.response){
+        resp.map(el => {
+          display.push({
+            vidId: el.id.videoId,
+            title: el.snippet.title,
+            description: el.snippet.description,
+            thumbnail: el.snippet.thumbnails.medium.url,         
+          })
+        });
+      }
+    this.setState({
+      display: display,
+    })  
+    //console.log('response', this.response) 
+  };
+
+  getVideoDisplay = (videoID, title, description) => {
+    this.setState({
+      iFrame: videoID,
+      playTitle: title,
+      playDescription: description,
+      loading: false,
+    })
+    console.log('state vidID', videoID)
+  }
+
+  render(){
+    return (
+        <div className="App container">
+          <Search searchVideo={this.searchVideo} />
+          <div className="row">
+            <VideoDetail iFrame={this.state.iFrame} playTitle={this.state.playTitle} playDescription={this.state.playDescription} loading={this.state.loading} />
+            {this.state.display && <VideoList getVideoDisplay={this.getVideoDisplay} display={this.state.display} loading={this.state.loading} />}
+          </div>
+        </div>
+      );
+  }
+  
 }
 
 export default App;

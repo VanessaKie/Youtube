@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+## used Libraries
+
+npm install --save react-spinners
+npm install react-bootstrap bootstrap
+
 ## Available Scripts
 
 In the project directory, you can run:
