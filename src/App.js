@@ -66,7 +66,7 @@ class App extends React.Component {
     return (
         <div className="App container">
           <Search searchVideo={this.searchVideo} />
-          <div className="row">
+          <div className="row p-3">
             <VideoDetail iFrame={this.state.iFrame} playTitle={this.state.playTitle} playDescription={this.state.playDescription} loading={this.state.loading} />
             {this.state.display && <VideoList getVideoDisplay={this.getVideoDisplay} display={this.state.display} loading={this.state.loading} />}
           </div>
