@@ -32,8 +32,6 @@ class App extends React.Component {
 
     this.response = response;
 
-    console.log('this.response', this.response.data.items[0].id.videoId);
-
     let resp = this.response.data.items;
     const display = [];
         if (this.response){
@@ -49,7 +47,7 @@ class App extends React.Component {
     this.setState({
       display: display,
     })  
-    //console.log('response', this.response) 
+
   };
 
   getVideoDisplay = (videoID, title, description) => {
@@ -59,7 +57,7 @@ class App extends React.Component {
       playDescription: description,
       loading: false,
     })
-    console.log('state vidID', videoID)
+   
   }
 
   render(){

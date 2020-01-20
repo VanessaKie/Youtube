@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { css } from "@emotion/core";
-import { RingLoader } from "react-spinners";
 
 
 const VideoList = (props) => {

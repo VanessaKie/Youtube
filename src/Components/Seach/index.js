@@ -32,7 +32,6 @@ class Search extends React.Component {
                 <div className='col'>
                     <input className="form-control ds-input " type='text' onChange={this.handleSearch} placeholder='Search ...' value={this.state.search} />
                 </div>
-                {console.log('search', this.state.search)}
             </form>
         </div>
 
